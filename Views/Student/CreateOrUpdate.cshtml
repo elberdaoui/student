@@ -1,0 +1,63 @@
+﻿@model studentOneMethod.Models.Student
+
+<br/>
+<h2 class="text-info">@(Model.id!=0 ? "Edit" : "Create") Student</h2>
+<br/>
+<div class="border container">
+    <form mothod="post" asp-action="CreateOrUpdate">
+        @if(Model.id != 0)
+        {
+            <input type="hidden" asp-for="id" />
+        }
+        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="CIN"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="CIN" class="form-control" />
+                <span asp-validation-for="CIN" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="FName"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="FName" class="form-control" />
+                <span asp-validation-for="FName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="LName"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="LName" class="form-control" />
+                <span asp-validation-for="LName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="Address"></label>
+            </div>
+            <div class="col-6">
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-3 offset-3">
+                <button type="submit" class="btn btn-primary form-control">
+                    @(Model.id != 0 ? "Update" : "Create")
+                </button>
+            </div>
+            <div class="col-3">
+                <a asp-action="Index" class="btn btn-success form-control">Back to List</a>
+            </div>
+        </div>
+    </form>
+</div>
+@section Scripts{ 
+<partial name="_ValidationScriptsPartial" />
+}
