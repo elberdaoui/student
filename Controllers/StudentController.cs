@@ -33,15 +33,15 @@ namespace studentOneMethod.Controllers
         [HttpGet]
         public async Task<IActionResult> Index(string searchString)
         {
-            var movies = from m in _std.students
+            var studenSearch = from m in _std.students
                          select m;
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                movies = movies.Where(s => s.FName.Contains(searchString) || s.LName.Contains(searchString) || s.CIN.Contains(searchString));
+                studenSearch = studenSearch.Where(s => s.FName.Contains(searchString) || s.LName.Contains(searchString) || s.CIN.Contains(searchString));
             }
 
-            return View(await movies.ToListAsync());
+            return View(await studenSearch.ToListAsync());
         }
         #endregion
 

@@ -9476,7 +9476,7 @@
   },
   "packageFolders": {
     "C:\\Users\\Administrateur\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Microsoft\\Xamarin\\NuGet": {}
   },
   "project": {
     "version": "1.0.0",
@@ -9488,7 +9488,7 @@
       "outputPath": "C:\\Users\\Administrateur\\source\\repos\\studentOneMethod\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\"
+        "C:\\Microsoft\\Xamarin\\NuGet"
       ],
       "configFilePaths": [
         "C:\\Users\\Administrateur\\AppData\\Roaming\\NuGet\\NuGet.Config",
