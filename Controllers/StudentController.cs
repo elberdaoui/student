@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NToastNotify;
 using studentOneMethod.Models;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace studentOneMethod.Controllers
 {
+    
     public class StudentController : Controller
     {
         [BindProperty]
@@ -44,7 +46,7 @@ namespace studentOneMethod.Controllers
             return View(await studenSearch.ToListAsync());
         }
         #endregion
-
+        [Authorize]
         #region CreateOrUpdate
         [HttpGet]
         public IActionResult CreateOrUpdate(int? id)
@@ -65,7 +67,7 @@ namespace studentOneMethod.Controllers
             return View(Student);
         }
 
-
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult CreateOrUpdate()
@@ -88,14 +90,14 @@ namespace studentOneMethod.Controllers
             return View(Student);
         }
         #endregion
-
+        [Authorize]
         public IActionResult Delete(int? id)
         {
             var del = _std.students.FirstOrDefault(d => d.id == id);
             
             return View(del);
         }
-
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)

@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,10 +26,34 @@ namespace studentOneMethod
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddRazorPages();
             services.AddDbContext<StudentContext>(options
                 => options.UseSqlServer(Configuration.GetConnectionString("con")));
             services.AddMvc();
-            services.AddControllersWithViews().AddNToastNotifyNoty(new NToastNotify.NotyOptions()
+            services.AddAuthentication()
+                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddFacebook(facebookOptions =>
+            {
+                facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
+                facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+                facebookOptions.AccessDeniedPath = "/AccessDeniedPathInfo";
+            })
+                .AddGoogle(googleOptions =>
+            {
+                IConfigurationSection googleAuthNSection =
+                    Configuration.GetSection("Authentication:Google");
+
+                googleOptions.ClientId = googleAuthNSection["ClientId"];
+                googleOptions.ClientSecret = googleAuthNSection["ClientSecret"];
+                
+                //googleOptions.CallbackPath = new PathString("/signin-google");
+            });
+
+            services.AddControllers();
+
+            services.AddControllersWithViews()
+                .AddRazorRuntimeCompilation()
+                .AddNToastNotifyNoty(new NToastNotify.NotyOptions()
             {
                 ProgressBar = true, //Showing progressbar
                 Timeout = 3000, //time the notification takes to disappear (ms)
@@ -54,15 +80,20 @@ namespace studentOneMethod
 
             app.UseRouting();
 
+            app.UseAuthentication();
+
             app.UseAuthorization();
 
             //app.UseMvc();
 
             app.UseEndpoints(endpoints =>
             {
+                
+                endpoints.MapRazorPages();
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Student}/{action=Index}/{id?}");
+                
             });
         }
     }
