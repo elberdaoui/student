@@ -20,13 +20,15 @@ namespace studentOneMethod.Areas.Identity
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("con")));
                 
-                services.AddDefaultIdentity<User>(options =>
+                services.AddIdentity<User, IdentityRole>(options =>
                 {
                     options.SignIn.RequireConfirmedAccount = false;
                     options.Password.RequireLowercase = false;
                     options.Password.RequireUppercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
                     
                 })
+                    
                     .AddEntityFrameworkStores<UserContext>();
 
             });

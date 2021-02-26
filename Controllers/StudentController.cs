@@ -46,7 +46,7 @@ namespace studentOneMethod.Controllers
             return View(await studenSearch.ToListAsync());
         }
         #endregion
-        [Authorize]
+        //[Authorize]
         #region CreateOrUpdate
         [HttpGet]
         public IActionResult CreateOrUpdate(int? id)
