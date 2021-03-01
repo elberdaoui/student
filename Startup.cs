@@ -34,6 +34,12 @@ namespace studentOneMethod
             services.AddDbContext<StudentContext>(options
                 => options.UseSqlServer(Configuration.GetConnectionString("con")));
             services.AddMvc();
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = $"/Identity/Account/Login";
+                options.LogoutPath = $"/Identity/Account/Logout";
+                options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+            });
             services.AddAuthentication()
                 .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddFacebook(facebookOptions =>

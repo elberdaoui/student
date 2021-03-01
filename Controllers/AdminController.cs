@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using studentOneMethod.Areas.Identity.Data;
 using studentOneMethod.Models;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace studentOneMethod.Controllers
 {
+    [Authorize(Roles ="Student")]
     public class AdminController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
@@ -28,6 +30,7 @@ namespace studentOneMethod.Controllers
         }
 
         [HttpGet]
+        
         public IActionResult CreateRole()
         {
             return View();
@@ -58,6 +61,7 @@ namespace studentOneMethod.Controllers
             return View(role);
         }
 
+        
         public async Task<IActionResult> EditRole(string id)
         {
             var role = await roleManager.FindByIdAsync(id);

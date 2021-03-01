@@ -29,7 +29,9 @@ namespace studentOneMethod.Areas.Identity
                     
                 })
                     
-                    .AddEntityFrameworkStores<UserContext>();
+                    .AddEntityFrameworkStores<UserContext>()
+                    .AddDefaultUI()
+                    .AddDefaultTokenProviders();
 
             });
         }
