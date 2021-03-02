@@ -17,6 +17,7 @@ namespace studentOneMethod.Controllers
         public Student Student { get; set; }
         private readonly StudentContext _std;
         private readonly IToastNotification _toastNotification;
+      
 
         public StudentController(StudentContext std, IToastNotification toastNotification)
         {
@@ -24,6 +25,7 @@ namespace studentOneMethod.Controllers
             _toastNotification = toastNotification;
         }
 
+       
         #region List and Search
         public IActionResult Index()
         {

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace studentOneMethod.Controllers
 {
-    [Authorize(Roles ="Student")]
+    [Authorize(Roles ="Admin")]
     public class AdminController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
