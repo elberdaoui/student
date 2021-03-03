@@ -29,9 +29,11 @@ namespace studentOneMethod.Controllers
         #region List and Search
         public IActionResult Index()
         {
+            var listSql = _std.students.FromSqlRaw<Student>("GetAllStudent").ToList();
+            return View(listSql);
+            //var list = _std.students.ToList();
+            //return View(list);
 
-            var list = _std.students.ToList();
-            return View(list);
         }
 
         [HttpGet]
